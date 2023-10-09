@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+<body>
+<div class="justify-content-center">
+    <div class="row justify-content-center">
+        <img src="{% static 'assets/img/online-banking.jpg' %}" alt="Hero Imgs" width="1280" height="400" data-aos="zoom-out" data-aos-delay="100">
+    </div>
+    <div class="hero-container" data-aos="fade-in">
+        <h2>Login</h2>
+            <form action="login" method="post">
+                {% csrf_token %}
+                <div class="form-group mt-3">
+                    <input type="text" name="username" placeholder="Enter your username">
+                </div><br>
+                <div class="form-group mt-3">
+                    <input type="password" name="password" placeholder="Enter your password">
+                </div><br>
+                    <div class="text-center">
+                        <a href="start" class="button">Submit</a>
+                    </div><br>
+                <a href="register" class="regbtn">Register</a>
+            </form>
+    </div>
+</div>
+</body>
+</html>

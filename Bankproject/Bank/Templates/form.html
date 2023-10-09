@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start an account</title>
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+<script type="text/javascript">
+    function addoption(code,value)
+    {
+        var option=document.createElement("option");
+        option.value=code;
+        option.text=value;
+        return option;
+    }
+    function removeoption(obj)
+    {
+        var i, L=obj.options.length -1;
+        for(i=L; i>=0;i--) {
+            obj.remove(i);
+        }
+    }
+    function change(val)
+    {
+        var brn = document.getElementsByName("branch")[0];
+        if (val.value == "ERN") {
+            brn.disabled=false;
+            removeoption(brn);
+            brn.add(addoption("ANG","Angamaly"));
+            brn.add(addoption("KCH","Kochi"));
+            brn.add(addoption("PRM","Perumbavoor"));
+            brn.add(addoption("EDP","Edapally"));
+            brn.add(addoption("MVP","Muvattupuzha"));
+            brn.add(addoption("ALV","Aluva"));
+        }
+        else if (val.value == "TSR") {
+            brn.disabled=false;
+            removeoption(brn);
+            brn.add(addoption("KDG","Kodungallur"));
+            brn.add(addoption("IJK","Irinjalakuda"));
+            brn.add(addoption("CLD","Chalakudy"));
+            brn.add(addoption("KNL","Kunnamkulam"));
+            brn.add(addoption("WDY","Wadakkanchery"));
+            brn.add(addoption("PDK","Pudukkad"));
+        }
+        else if (val.value == "KTY") {
+            brn.disabled=false;
+            removeoption(brn);
+            brn.add(addoption("CGN","Changanassery"));
+            brn.add(addoption("ERP","Erattupetta"));
+            brn.add(addoption("PLA","Pala"));
+            brn.add(addoption("ETR","Ettumanoor"));
+            brn.add(addoption("WDY","Vaikom"));
+        }
+        else if (val.value == "PLD") {
+            brn.disabled=false;
+            removeoption(brn);
+            brn.add(addoption("NLP","Nelliampathi"));
+            brn.add(addoption("ERP","Malampuzha"));
+            brn.add(addoption("SRN","Shoranur"));
+            brn.add(addoption("PTM","Pattambi"));
+            brn.add(addoption("ATP","Attapadi"));
+            brn.add(addoption("ALT","Alathur"));
+        }
+        else if (val.value == "TVM") {
+            brn.disabled=false;
+            removeoption(brn);
+            brn.add(addoption("NLP","Kovalam"));
+            brn.add(addoption("ERP","Varkala"));
+            brn.add(addoption("SRN","Neyyattinkara"));
+            brn.add(addoption("PTM","Pattambi"));
+            brn.add(addoption("ATP","Poovar"));
+            brn.add(addoption("ALT","Nedumangadu"));
+        }
+        else{
+            brn.disabled=true;
+        }
+    }
+</script>
+<div class="justify-content-center">
+    <div class="row justify-content-center">
+        <img src="{% static 'assets/img/formimg.jpg' %}" alt="Hero Imgs" width="1280" height="400" data-aos="zoom-out" data-aos-delay="100">
+
+        <h4>Kindly fill the form to start an account</h4>
+        <form action="form" method="post">
+            {% csrf_token %}
+            <label>
+                First Name:<input type="text" name="first_name" required placeholder="Enter your firstname" />
+            </label><br>
+            <label>
+                Last Name:<input type="text" name="last_name" required placeholder="Enter your lastname" />
+            </label><br>
+            <label>
+                Age:<input type="number" name="age" min="18" max="99" required placeholder="Enter your age" />
+            </label><br>
+            <label>
+                Gender(M/F):<input type="text" name="gender" required placeholder="Enter your gender" />
+            </label><br>
+            <label>
+            Phone No:<input type="text" name="phone_no" maxlength="10" required placeholder="Enter your phone no" />
+            </label><br>
+            <label>
+            Email:<input type="email" name="email" required placeholder="Enter your email" />
+            </label><br>
+            <label>
+            Address:<input type="text" name="address" required placeholder="Enter your address" />
+            </label><br>
+            <label>District:
+                <select name="district" onchange="change(this)" required >
+                    <option value="DEF">Choose a District</option>
+                    <option value="ERN">Ernakulam</option>
+                    <option value="TSR">Thrissur</option>
+                    <option value="KTY">Kottayam</option>
+                    <option value="PLD">Palakkad</option>
+                    <option value="TVM">Trivandrum</option>
+                </select>
+            </label>
+            <label>Branch:
+                <select name="branch"  required >
+                    <option value="DEF">Choose a Branch</option>
+                </select>
+            </label><br>
+            <label>Choose account type :
+            <select name="account_type" required>
+                <option>Choose a type of account</option>
+                <option>Savings a/c</option>
+                <option>Current a/c</option>
+                <option>Fixed Deposit a/c</option>
+                <option>Recurring Deposit a/c</option>
+            </select></label><br>
+            <!--<div style="width:250px; height:50px;">-->
+
+            <label>Choose materials required :
+                <ul>
+                <input type="checkbox" class="materials_req" name="materials_req" value="Pass Book">Pass Book
+                <input type="checkbox" class="materials_req" name="materials_req" value="Cheque Book">Cheque Book
+                <input type="checkbox" class="materials_req" name="materials_req" value="Debit card">Debit card
+                <input type="checkbox" class="materials_req" name="materials_req" value="Credit card">Credit card
+                </ul>
+            </label> <br>
+            <!--<select style="width:250px; height:50px" name="materials_provide" multiple="true" size="4">
+                <option>Pass Book</option><br>
+                <option>Cheque Book</option><br>
+                <option>Debit card</option><br>
+                <option>Credit card</option>
+            </select>-->
+            <button class="regbtn" type="submit">SUBMIT</button>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
